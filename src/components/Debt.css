@@ -1,0 +1,108 @@
+/* src/components/Debt.css */
+.debt-title {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .debt-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .debt-input {
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1.5px solid #ccc;
+    width: 180px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .debt-input:focus {
+    border-color: #e74c3c;
+    outline: none;
+  }
+  
+  .debt-add-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+  }
+  
+  .debt-add-button:hover {
+    background-color: #c0392b;
+  }
+  
+  .debt-list {
+    list-style: none;
+    padding-left: 0;
+    max-height: 280px;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 6px 6px;
+    box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.05);
+  }
+  
+  .debt-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+  }
+  
+  .debt-amount {
+    font-weight: 600;
+    color: #c0392b;
+  }
+  
+  .debt-total {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+    text-align: right;
+    color: #34495e;
+  }
+  
+  .debt-noitems {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+  }
+  
+  @media (max-width: 400px) {
+    .debt-form {
+      flex-direction: column;
+      align-items: center;
+    }
+    .debt-input {
+      width: 100%;
+      max-width: 300px;
+      font-size: 18px;
+    }
+    .debt-add-button {
+      width: 100%;
+      max-width: 300px;
+      font-size: 18px;
+      margin-top: 10px;
+      padding: 14px 0;
+    }
+    .debt-list-item {
+      font-size: 14px;
+      padding: 6px 10px;
+    }
+    .debt-total {
+      font-size: 16px;
+    }
+  }
