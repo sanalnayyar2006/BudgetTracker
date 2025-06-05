@@ -24,6 +24,11 @@ function BudgetTracker() {
     setCategory('Food');
   }
 
+  function handleDeleteItem(id) {
+    const filteredItems = items.filter(item => item.id !== id);
+    setItems(filteredItems);
+  }
+
   // Helper to filter items by category
   function itemsForCategory(cat) {
     return items.filter(item => item.category === cat);
@@ -92,6 +97,13 @@ function BudgetTracker() {
                     <li key={item.id} className="budget-list-item">
                       <span>{item.description}</span>
                       <span className="budget-amount">${item.amount.toFixed(2)}</span>
+                      <button 
+                        className="delete-button" 
+                        onClick={() => handleDeleteItem(item.id)} 
+                        aria-label={`Delete ${item.description}`}
+                      >
+                        &#x2716;
+                      </button>
                     </li>
                   ))}
                 </ul>
