@@ -24,12 +24,12 @@
   }
   
   .debt-input:focus {
-    border-color: #e74c3c;
+    border-color: #e92300;
     outline: none;
   }
   
   .debt-add-button {
-    background-color: #e74c3c;
+    background-color: #49bf00;
     color: white;
     border: none;
     border-radius: 6px;
@@ -41,7 +41,7 @@
   }
   
   .debt-add-button:hover {
-    background-color: #c0392b;
+    background-color: #088404;
   }
   
   .debt-list {

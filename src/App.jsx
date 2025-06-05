@@ -6,9 +6,9 @@ import Courses from './components/Courses';
 import './App.css';
 
 function App() {
-  var pageState = useState('budget');
-  var page = pageState[0];
-  var setPage = pageState[1];
+  let pageState = useState('budget');
+  let page = pageState[0];
+  let setPage = pageState[1];
 
   function renderPage() {
     if (page === 'budget') {
