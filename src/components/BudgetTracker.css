@@ -147,3 +147,8 @@
   border-color: #3498db;
   outline: none;
 }
+.budget-select {
+  width: 100%;
+  max-width: 300px;
+  font-size: 18px;
+}
