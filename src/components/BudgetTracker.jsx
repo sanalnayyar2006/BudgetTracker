@@ -5,10 +5,23 @@ function BudgetTracker() {
   const [items, setItems] = useState([]);
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [category, setCategory] = useState('Food'); // default category
 
   function handleAddItem(e) {
-
-  
+    e.preventDefault();
+    if (description.trim() === '' || amount === '' || isNaN(amount)) {
+      return;
+    }
+    const newItem = {
+      id: Date.now(),
+      description: description.trim(),
+      amount: parseFloat(amount),
+      category: category,
+    };
+    setItems([...items, newItem]);
+    setDescription('');
+    setAmount('');
+    setCategory('Food'); // reset to default
   }
 
   const total = items.reduce((acc, item) => acc + item.amount, 0);
@@ -36,6 +49,16 @@ function BudgetTracker() {
           aria-label="Amount"
           required
         />
+        <select
+          className="budget-select"
+          value={category}
+          onChange={e => setCategory(e.target.value)}
+          aria-label="Category"
+        >
+          <option value="Food">Food</option>
+          <option value="Miscellaneous">Miscellaneous</option>
+          <option value="Entertainment">Entertainment</option>
+        </select>
         <button type="submit" className="budget-add-button">
           Add
         </button>
@@ -47,14 +70,16 @@ function BudgetTracker() {
         <ul className="budget-list">
           {items.map(item => (
             <li key={item.id} className="budget-list-item">
-              <span>{item.description}</span>
-              <span className="budget-amount"></span>
+              <span>
+                <strong>{item.category}</strong> - {item.description}
+              </span>
+              <span className="budget-amount">${item.amount.toFixed(2)}</span>
             </li>
           ))}
         </ul>
       )}
       <div className="budget-total">
-        Total Budget: 
+        Total Budget: <strong>${total.toFixed(2)}</strong>
       </div>
     </section>
   );
