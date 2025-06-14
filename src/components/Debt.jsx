@@ -131,5 +131,9 @@ function Debt() {
     </section>
   );
 }
+function deleteDebt(id) {
+  const updatedDebts = debts.filter(debt => debt.id !== id);
+  setDebts(updatedDebts);
+}
 
 export default Debt;
