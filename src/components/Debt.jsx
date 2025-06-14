@@ -10,23 +10,22 @@ function Debt() {
   const [editCreditor, setEditCreditor] = React.useState('');
   const [editAmount, setEditAmount] = React.useState('');
 
-  function addDebt(e) {
-    e.preventDefault();
-
-    if (creditor.trim() === '' || amount === '' || isNaN(amount)) {
-      return;
-    }
-
-    const newDebt = {
-      id: Date.now(),
-      creditor: creditor.trim(),
-      amount: parseFloat(amount),
-    };
-
-    setDebts([...debts, newDebt]);
-    setCreditor('');
-    setAmount('');
+ function addDebt(e) {
+  e.preventDefault();
+  if (creditor.trim() === '' || amount === '' || isNaN(amount)) {
+    return;
   }
+  const newDebt = {
+    id: Date.now(),
+    creditor: creditor.trim(),
+    amount: parseFloat(amount),
+    priority: priority,    // Include priority in the new object
+  };
+  setDebts([...debts, newDebt]);
+  setCreditor('');
+  setAmount('');
+  setPriority('Medium');  // Reset priority to default
+}
 
   function startEdit(debt) {
     setEditId(debt.id);
