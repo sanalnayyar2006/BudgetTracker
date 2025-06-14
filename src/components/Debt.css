@@ -106,3 +106,23 @@
       font-size: 16px;
     }
   }
+  .debt-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+  border-left: 6px solid transparent; /* space for priority color */
+  transition: background-color 0.3s ease;
+}
+/* Priority colors */
+.debt-list-item.low {
+  border-left-color: #2ecc71; 
+}
+.debt-list-item.medium {
+  border-left-color: #f1c40f; 
+}
+.debt-list-item.high {
+  border-left-color: #e74c3c; 
+}
