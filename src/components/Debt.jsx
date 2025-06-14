@@ -18,3 +18,7 @@ function Debt() {
     setCreditor('');
     setAmount('');
   }
+  var totalDebt = 0;
+  for (let i = 0; i < debts.length; i++) {
+    totalDebt += debts[i].amount;
+  }
