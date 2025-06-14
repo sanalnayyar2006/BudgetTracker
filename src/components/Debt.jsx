@@ -61,6 +61,11 @@ function Debt() {
     cancelEdit();
   }
 
+  function deleteDebt(id) {
+    const updatedDebts = debts.filter(debt => debt.id !== id);
+    setDebts(updatedDebts);
+  }
+
   var totalDebt = debts.reduce((acc, debt) => acc + debt.amount, 0);
 
   return (
@@ -118,6 +123,7 @@ function Debt() {
                   <span>{debt.creditor}</span>
                   <span className="debt-amount">${debt.amount.toFixed(2)}</span>
                   <button onClick={() => startEdit(debt)} className="edit-button" aria-label={`Edit ${debt.creditor}`}>Edit</button>
+                  <button onClick={() => deleteDebt(debt.id)} className="delete-button" aria-label={`Delete ${debt.creditor}`}>&#x2716;</button>
                 </>
               )}
             </li>
@@ -131,38 +137,5 @@ function Debt() {
     </section>
   );
 }
-function deleteDebt(id) {
-  const updatedDebts = debts.filter(debt => debt.id !== id);
-  setDebts(updatedDebts);
-}
-{debts.map(debt => (
-  <li key={debt.id} className="debt-list-item">
-    {editId === debt.id ? (
-      <form onSubmit={saveEdit} className="edit-form">
-        {/* edit inputs and buttons */}
-      </form>
-    ) : (
-      <>
-        <span>{debt.creditor}</span>
-        <span className="debt-amount">${debt.amount.toFixed(2)}</span>
-        <button
-          onClick={() => startEdit(debt)}
-          className="edit-button"
-          aria-label={`Edit ${debt.creditor}`}
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => deleteDebt(debt.id)}
-          className="delete-button"
-          aria-label={`Delete ${debt.creditor}`}
-        >
-          &#x2716;
-        </button>
-      </>
-    )}
-  </li>
-))}
-
 
 export default Debt;
