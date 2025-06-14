@@ -35,3 +35,19 @@ function Debt() {
           aria-label="Creditor"
           required
         />
+        <input
+          type="number"
+          step="0.01"
+          className="debt-input"
+          placeholder="Amount Owed"
+          value={amount}
+          onChange={function (e) { setAmount(e.target.value); }}
+          aria-label="Amount Owed"
+          required
+        />
+        <button type="submit" className="debt-add-button" aria-label="Add Debt">Add Debt</button>
+      </form>
+    </section>
+  );
+}
+export default Debt;
