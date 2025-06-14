@@ -85,5 +85,23 @@ function cancelEdit() {
   setEditCreditor('');
   setEditAmount('');
 }
+function saveEdit(e) {
+  e.preventDefault();
+  if (editCreditor.trim() === '' || editAmount === '' || isNaN(editAmount)) {
+    return;
+  }
+  const updatedDebts = debts.map(debt => {
+    if (debt.id === editId) {
+      return {
+        ...debt,
+        creditor: editCreditor.trim(),
+        amount: parseFloat(editAmount),
+      };
+    }
+    return debt;
+  });
+  setDebts(updatedDebts);
+  cancelEdit();
+}
 
 export default Debt;
