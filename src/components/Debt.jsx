@@ -75,5 +75,15 @@ function Debt() {
 const [editId, setEditId] = React.useState(null);
 const [editCreditor, setEditCreditor] = React.useState('');
 const [editAmount, setEditAmount] = React.useState('');
+function startEdit(debt) {
+  setEditId(debt.id);
+  setEditCreditor(debt.creditor);
+  setEditAmount(debt.amount.toString());
+}
+function cancelEdit() {
+  setEditId(null);
+  setEditCreditor('');
+  setEditAmount('');
+}
 
 export default Debt;
