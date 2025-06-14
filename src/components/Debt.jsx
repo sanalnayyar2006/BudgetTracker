@@ -10,22 +10,23 @@ function Debt() {
   const [editCreditor, setEditCreditor] = React.useState('');
   const [editAmount, setEditAmount] = React.useState('');
 
- function addDebt(e) {
-  e.preventDefault();
-  if (creditor.trim() === '' || amount === '' || isNaN(amount)) {
-    return;
+  function addDebt(e) {
+    e.preventDefault();
+
+    if (creditor.trim() === '' || amount === '' || isNaN(amount)) {
+      return;
+    }
+
+    const newDebt = {
+      id: Date.now(),
+      creditor: creditor.trim(),
+      amount: parseFloat(amount),
+    };
+
+    setDebts([...debts, newDebt]);
+    setCreditor('');
+    setAmount('');
   }
-  const newDebt = {
-    id: Date.now(),
-    creditor: creditor.trim(),
-    amount: parseFloat(amount),
-    priority: priority,    // Include priority in the new object
-  };
-  setDebts([...debts, newDebt]);
-  setCreditor('');
-  setAmount('');
-  setPriority('Medium');  // Reset priority to default
-}
 
   function startEdit(debt) {
     setEditId(debt.id);
@@ -136,38 +137,5 @@ function Debt() {
     </section>
   );
 }
-<select
-  className="debt-priority-select"
-  value={priority}
-  onChange={e => setPriority(e.target.value)}
-  aria-label="Priority"
->
-  <option value="Low">Low</option>
-  <option value="Medium">Medium</option>
-  <option value="High">High</option>
-</select>
-{debts.map(debt => {
-  const priorityClass = debt.priority.toLowerCase(); // 'low', 'medium', or 'high'
-  return (
-    <li key={debt.id} className={`debt-list-item ${priorityClass}`}>
-      {editId === debt.id ? (
-        <form onSubmit={saveEdit} className="edit-form">
-          {/* edit inputs/buttons here */}
-        </form>
-      ) : (
-        <>
-          <span>{debt.creditor}</span>
-          <span className="debt-amount">${debt.amount.toFixed(2)}</span>
-          <button onClick={() => startEdit(debt)} className="edit-button" aria-label={`Edit ${debt.creditor}`}>
-            Edit
-          </button>
-          <button onClick={() => deleteDebt(debt.id)} className="delete-button" aria-label={`Delete ${debt.creditor}`}>
-            &#x2716;
-          </button>
-        </>
-      )}
-    </li>
-  );
-})}
 
 export default Debt;
