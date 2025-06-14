@@ -72,5 +72,8 @@ function Debt() {
     </section>
   );
 }
+const [editId, setEditId] = React.useState(null);
+const [editCreditor, setEditCreditor] = React.useState('');
+const [editAmount, setEditAmount] = React.useState('');
 
 export default Debt;
