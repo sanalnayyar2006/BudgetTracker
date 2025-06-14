@@ -22,3 +22,16 @@ function Debt() {
   for (let i = 0; i < debts.length; i++) {
     totalDebt += debts[i].amount;
   }
+  return (
+    <section>
+      <h2 className="debt-title">Debt Management</h2>
+      <form onSubmit={addDebt} className="debt-form">
+        <input
+          type="text"
+          className="debt-input"
+          placeholder="Creditor"
+          value={creditor}
+          onChange={function (e) { setCreditor(e.target.value); }}
+          aria-label="Creditor"
+          required
+        />
