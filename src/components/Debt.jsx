@@ -137,5 +137,15 @@ function Debt() {
     </section>
   );
 }
+<select
+  className="debt-priority-select"
+  value={priority}
+  onChange={e => setPriority(e.target.value)}
+  aria-label="Priority"
+>
+  <option value="Low">Low</option>
+  <option value="Medium">Medium</option>
+  <option value="High">High</option>
+</select>
 
 export default Debt;
