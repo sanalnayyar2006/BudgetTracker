@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navigation.css';
-
+import { Link } from 'react-router-dom'
 function Navigation(props) {
   function onClickBudget() {
     props.onChangePage('budget');

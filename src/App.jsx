@@ -6,25 +6,30 @@ import Courses from './components/Courses';
 import './App.css';
 
 function App() {
-  let pageState = useState('budget');
-  let page = pageState[0];
-  let setPage = pageState[1];
+  // Track current page with state ('budget', 'debt', or 'courses')
+  const [currentPage, setCurrentPage] = useState('budget');
 
-  function renderPage() {
-    if (page === 'budget') {
-      return <BudgetTracker />;
-    } else if (page === 'debt') {
-      return <Debt />;
-    } else if (page === 'courses') {
-      return <Courses />;
-    } else {
-      return <BudgetTracker />;
+  // Render the current page component
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'debt':
+        return <Debt />;
+      case 'courses':
+        return <Courses />;
+      default: // Default to BudgetTracker
+        return <BudgetTracker />;
     }
-  }
+  };
 
   return (
     <div className="app-container">
-      <Navigation currentPage={page} onChangePage={setPage} />
+      {/* Navigation bar to switch pages */}
+      <Navigation 
+        currentPage={currentPage} 
+        onChangePage={setCurrentPage} 
+      />
+      
+      {/* Main content area */}
       <main className="main-content">
         {renderPage()}
       </main>
