@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase';
 import './Login.css';
 
-function Login() {
-  // State to store form data
+function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false);
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents page refresh
-    
-    // Simple validation
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
     if (!email || !password) {
-      alert('Please fill in all fields');
+      setError('Please fill in all fields');
       return;
     }
-    
-    // Here you would typically send data to your backend
-    console.log('Login attempt:', { email, password });
-    alert('Login functionality would go here!');
+    try {
+      if (isSignUp) {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
+      if (onLogin) onLogin();
+    } catch (err) {
+      setError(err.message || (isSignUp ? 'Sign up failed' : 'Invalid email or password'));
+    }
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
-        <h2>Welcome Back</h2>
-        <p>Please sign in to your account</p>
-        
+        <h2>{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
+        <p>{isSignUp ? 'Sign up for a new account' : 'Please sign in to your account'}</p>
         <form onSubmit={handleSubmit}>
           {/* Email Input */}
           <div className="input-group">
@@ -54,22 +60,37 @@ function Login() {
             />
           </div>
 
-          {/* Remember Me Checkbox */}
-          <div className="checkbox-group">
-            <input type="checkbox" id="remember" />
-            <label htmlFor="remember">Remember me</label>
-          </div>
+          {/* Remember Me Checkbox (only for login) */}
+          {!isSignUp && (
+            <div className="checkbox-group">
+              <input type="checkbox" id="remember" />
+              <label htmlFor="remember">Remember me</label>
+            </div>
+          )}
 
-          {/* Login Button */}
+          {/* Error Message */}
+          {error && <div className="error">{error}</div>}
+
+          {/* Login/Sign Up Button */}
           <button type="submit" className="login-btn">
-            Sign In
+            {isSignUp ? 'Sign Up' : 'Sign In'}
           </button>
         </form>
 
         {/* Additional Links */}
         <div className="login-footer">
-          <a href="#forgot">Forgot your password?</a>
-          <p>Don't have an account? <a href="#signup">Sign up</a></p>
+          {!isSignUp && <a href="#forgot">Forgot your password?</a>}
+          <p>
+            {isSignUp ? (
+              <>Already have an account?{' '}
+                <a href="#login" onClick={e => { e.preventDefault(); setIsSignUp(false); setError(''); }}>Sign in</a>
+              </>
+            ) : (
+              <>Don't have an account?{' '}
+                <a href="#signup" onClick={e => { e.preventDefault(); setIsSignUp(true); setError(''); }}>Sign up</a>
+              </>
+            )}
+          </p>
         </div>
       </div>
     </div>
