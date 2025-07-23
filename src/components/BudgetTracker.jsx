@@ -54,24 +54,21 @@ function BudgetTracker() {
           placeholder="Description"
           value={description}
           onChange={e => setDescription(e.target.value)}
-          aria-label="Description"
           required
-        />
-        <input
+        /> 
+        <input   
           type="number"
           step="0.01"
           className="budget-input"
           placeholder="Amount"
           value={amount}
           onChange={e => setAmount(e.target.value)}
-          aria-label="Amount"
           required
         />
         <select
           className="budget-select"
           value={category}
           onChange={e => setCategory(e.target.value)}
-          aria-label="Category"
         >
           {categories.map(cat => (
             <option value={cat} key={cat}>{cat}</option>

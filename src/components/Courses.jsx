@@ -47,7 +47,7 @@ function Courses() {
             <div className="course-info">
               <h3>{course.title}</h3>
               <p>{course.duration}  {course.provider}</p>
-            </div>
+            </div> 
             <button 
               onClick={() => toggleCompletion(course.id)}
               className="completion-toggle"

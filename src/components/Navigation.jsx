@@ -1,37 +1,28 @@
 import React from 'react';
 import './Navigation.css';
-import { Link } from 'react-router-dom'
-function Navigation(props) {
-  function onClickBudget() {
-    props.onChangePage('budget');
-  }
-  function onClickDebt() {
-    props.onChangePage('debt');
-  }
-  function onClickCourses() {
-    props.onChangePage('courses');
-  }
+import { NavLink } from 'react-router-dom';
 
+function Navigation() {
   return (
-    <nav className="nav" aria-label="Main navigation">
-      <button
-        className={props.currentPage === 'budget' ? 'nav-btn active' : 'nav-btn'}
-        onClick={onClickBudget}
+    <nav className="nav">
+      <NavLink
+        to="/budget"
+        className={({ isActive }) => isActive ? 'nav-btn active' : 'nav-btn'}
       >
         Budget Tracker
-      </button>
-      <button
-        className={props.currentPage === 'debt' ? 'nav-btn active' : 'nav-btn'}
-        onClick={onClickDebt}
+      </NavLink>
+      <NavLink
+        to="/debt"
+        className={({ isActive }) => isActive ? 'nav-btn active' : 'nav-btn'}
       >
         Debt
-      </button>
-      <button
-        className={props.currentPage === 'courses' ? 'nav-btn active' : 'nav-btn'}
-        onClick={onClickCourses}
-      >
+      </NavLink>
+      <NavLink
+        to="/courses"
+        className={({ isActive }) => isActive ? 'nav-btn active' : 'nav-btn'}
+      >                  
         Courses
-      </button>
+      </NavLink>
     </nav>
   );
 }
